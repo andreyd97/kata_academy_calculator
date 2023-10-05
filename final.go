@@ -101,6 +101,9 @@ func main() {
 			_ = b
 		}
 
+		if eraA == nil && eraB != nil || eraA != nil && eraB == nil {
+			fmt.Println(errors.New("Используются разные системы счисления"))
+		}
 		if testA == false && testB == false {
 			for key, value := range riman {
 				if result[0] == key {
@@ -124,8 +127,11 @@ func main() {
 				{
 					c = subAB(romA, romB)
 					for key, value := range riman {
-						if c == value {
+						if c == value && c > 1 {
 							fmt.Println(key)
+						} else {
+							fmt.Println(errors.New("Отрицательное число"))
+							break
 						}
 					}
 				}
@@ -142,8 +148,11 @@ func main() {
 				{
 					c = divAB(romA, romB)
 					for key, value := range riman {
-						if c == value {
+						if c == value && c > 1 {
 							fmt.Println(key)
+						} else {
+							fmt.Println(errors.New("Отрицательное число"))
+							break
 						}
 					}
 				}
@@ -174,6 +183,7 @@ func main() {
 				}
 			}
 		}
+
 	} else {
 		fmt.Println(errors.New("Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."))
 	}
