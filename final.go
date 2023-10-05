@@ -87,90 +87,95 @@ func main() {
 
 	result := strings.Split(scanner, " ")
 
-	a, eraA := strconv.Atoi(result[0])
-	if eraA != nil {
-		testA = false
-		_ = a
-	}
+	if len(result) == 3 {
 
-	b, eraB := strconv.Atoi(result[2])
-	if eraB != nil {
-		testB = false
-		_ = b
-	}
+		a, eraA := strconv.Atoi(result[0])
+		if eraA != nil {
+			testA = false
+			_ = a
+		}
 
-	if testA == false && testB == false {
-		for key, value := range riman {
-			if result[0] == key {
-				romA = value
+		b, eraB := strconv.Atoi(result[2])
+		if eraB != nil {
+			testB = false
+			_ = b
+		}
+
+		if testA == false && testB == false {
+			for key, value := range riman {
+				if result[0] == key {
+					romA = value
+				}
+				if result[2] == key {
+					romB = value
+				}
 			}
-			if result[2] == key {
-				romB = value
+			switch result[1] {
+			case "+":
+				{
+					c = sumAB(romA, romB)
+					for key, value := range riman {
+						if c == value {
+							fmt.Println(key)
+						}
+					}
+				}
+			case "-":
+				{
+					c = subAB(romA, romB)
+					for key, value := range riman {
+						if c == value {
+							fmt.Println(key)
+						}
+					}
+				}
+			case "*":
+				{
+					c = multiAB(romA, romB)
+					for key, value := range riman {
+						if c == value {
+							fmt.Println(key)
+						}
+					}
+				}
+			case "/":
+				{
+					c = divAB(romA, romB)
+					for key, value := range riman {
+						if c == value {
+							fmt.Println(key)
+						}
+					}
+				}
 			}
 		}
-		switch result[1] {
-		case "+":
-			{
-				c = sumAB(romA, romB)
-				for key, value := range riman {
-					if c == value {
-						fmt.Println(key)
-					}
-				}
-			}
-		case "-":
-			{
-				c = subAB(romA, romB)
-				for key, value := range riman {
-					if c == value {
-						fmt.Println(key)
-					}
-				}
-			}
-		case "*":
-			{
-				c = multiAB(romA, romB)
-				for key, value := range riman {
-					if c == value {
-						fmt.Println(key)
-					}
-				}
-			}
-		case "/":
-			{
-				c = divAB(romA, romB)
-				for key, value := range riman {
-					if c == value {
-						fmt.Println(key)
-					}
-				}
-			}
-		}
-	}
 
-	if eraA == nil && eraB == nil {
-		switch result[1] {
-		case "+":
-			{
-				c = sumAB(a, b)
-				fmt.Println(c)
-			}
-		case "-":
-			{
-				c = subAB(a, b)
-				fmt.Println(c)
-			}
-		case "*":
-			{
-				c = multiAB(a, b)
-				fmt.Println(c)
-			}
-		case "/":
-			{
-				c = divAB(a, b)
-				fmt.Println(c)
+		if eraA == nil && eraB == nil {
+			switch result[1] {
+			case "+":
+				{
+					c = sumAB(a, b)
+					fmt.Println(c)
+				}
+			case "-":
+				{
+					c = subAB(a, b)
+					fmt.Println(c)
+				}
+			case "*":
+				{
+					c = multiAB(a, b)
+					fmt.Println(c)
+				}
+			case "/":
+				{
+					c = divAB(a, b)
+					fmt.Println(c)
+				}
 			}
 		}
+	} else {
+		fmt.Println(errors.New("Вывод ошибки, так как формат математической операции не удовлетворяет заданию — два операнда и один оператор (+, -, /, *)."))
 	}
 
 }
