@@ -73,7 +73,7 @@ func divAB(a, b int) int {
 }
 
 func main() {
-	var a, b, romA, romB int
+	var romA, romB int
 	var testA = true
 	var testB = true
 
